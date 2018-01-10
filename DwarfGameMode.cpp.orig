@@ -1,0 +1,69 @@
+// Fill out your copyright notice in the Description page of Project Settings.
+
+#include "DwarfGame.h"
+#include "DwarfGameMode.h"
+#include "DwarfMap.h"
+#include "MousePlayerController.h"
+#include "DwarfGameState.h"
+#include "Dworf.h"
+#include "CameraPawn.h"
+
+ADwarfGameMode::ADwarfGameMode( const FObjectInitializer& ObjectInitializer )
+: Super ( ObjectInitializer )
+{
+	PlayerControllerClass = AMousePlayerController::StaticClass();
+
+	HUDClass = ConstructorHelpers::FClassFinder<AHUD>(TEXT("Blueprint'/Game/DwarfHUD/BP_DwarvenHud.BP_DwarvenHud_c'")).Class;
+	DefaultPawnClass = ConstructorHelpers::FClassFinder<APawn>( TEXT( "Class'/Script/DwarfGame.CameraPawn'" ) ).Class;
+
+	GameStateClass = ADwarfGameState::StaticClass();
+	
+	
+}
+
+void ADwarfGameMode::StartPlay( )
+{
+	Super::StartPlay();
+
+	UWorld* World = GetWorld();
+
+	if ( World )
+	{
+<<<<<<< .merge_file_a15152
+		
+
+		ADworf* Dworf = World->SpawnActor<ADworf>( ADworf::StaticClass( ) );
+=======
+		ADworf* Dworf = World->SpawnActor<ADworf>(ADworf::StaticClass());
+		
+>>>>>>> .merge_file_a12108
+
+		if ( Dworf ){
+			ACameraPawn* CameraPawn = (ACameraPawn*)( World->GetPawnIterator( )->Get( ) );
+			CameraPawn->SetDwarf( Dworf );
+		}
+
+		ADwarfMap* map = World->SpawnActor<ADwarfMap>( ADwarfMap::StaticClass( ) );
+		map->SetWorld( World );
+		map->GenerateTiles( 21, 21 );
+<<<<<<< .merge_file_a15152
+=======
+		
+		GetGameState<ADwarfGameState>( )->SetMap( map );
+		Dworf->SetDwarfLocation(map->GetTile(0,0));
+
+	}
+
+
+>>>>>>> .merge_file_a12108
+
+		GetGameState<ADwarfGameState>()->SetMap( map );
+
+	}
+
+}
+
+void ADwarfGameMode::PostLogin( APlayerController* NewPlayer )
+{
+	Super::PostLogin( NewPlayer );
+}

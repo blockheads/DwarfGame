@@ -1,0 +1,37 @@
+diff a/Source/DwarfGame/DwarfGameMode.cpp b/Source/DwarfGame/DwarfGameMode.cpp	(rejected hunks)
+@@ -11,29 +11,17 @@
+ 	PlayerControllerClass = AMousePlayerController::StaticClass();
+ 
+ 	HUDClass = ConstructorHelpers::FClassFinder<AHUD>(TEXT("Blueprint'/Game/DwarfHUD/BP_DwarvenHud.BP_DwarvenHud_c'")).Class;
+-	DefaultPawnClass = ConstructorHelpers::FClassFinder<APawn>( TEXT( "Blueprint'/Game/Blueprints/CameraPawn_BP.CameraPawn_BP_c'" ) ).Class;
+-
+-	GameStateClass = ADwarfGameState::StaticClass();
+ }
+ 
+ void ADwarfGameMode::StartPlay( )
+ {
+ 	Super::StartPlay();
+-
+ 	UWorld* World = GetWorld();
+-	if ( World )
+-	{
+-		ADwarfMap* map = NewObject<ADwarfMap>( );
+-		map->SetWorld( World );
+-		map->GenerateTiles( 21, 21 );
+-		
+-		GetGameState<ADwarfGameState>( )->SetMap( map );
+-
+-	}
+-
+-
+-
+-
+ 
++	if (World){
+ 
++		
++		
++	}
++	
+ }
+\ No newline at end of file
